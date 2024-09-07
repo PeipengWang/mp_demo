@@ -6,11 +6,13 @@ import com.itheima.mp.domain.dto.UserFormDTO;
 import com.itheima.mp.domain.po.User;
 import com.itheima.mp.domain.query.UserQuery;
 import com.itheima.mp.domain.vo.UserVO;
+import com.itheima.mp.mapper.UserMapper;
 import com.itheima.mp.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -73,4 +75,5 @@ public class UserController {
     public PageDTO<UserVO> queryUsersPage(UserQuery query){
        return userService.queryUsersPage(query);
     }
+
 }
