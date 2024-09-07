@@ -5,10 +5,14 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.itheima.mp.domain.dto.ShopDTO;
 import com.itheima.mp.service.IShopService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.InputStream;
@@ -26,12 +30,26 @@ import java.util.stream.Collectors;
  * @author 
  * @since 2023-12-26
  */
+@Api(tags = "商店管理")
 @RestController
 @RequestMapping("/shop")
 @RequiredArgsConstructor
 public class ShopController {
 
     private final IShopService shopService;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @ApiOperation("测试rest请求")
+    @GetMapping("/invoke")
+    public String invokeService() {
+        String url = "http://localhost:8080/index2";
+        String result = restTemplate.getForObject(url, String.class);
+        System.out.println(result);
+        return result;
+    }
+
 
     @GetMapping
     public List<ShopDTO> findAll(){
